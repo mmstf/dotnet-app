@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
+using MySqlData.Data.MySqlClient;
 
 namespace learningapp.Pages;
 
@@ -18,13 +18,13 @@ public class IndexModel : PageModel
     public void OnGet()
     {
        
-        string connectionString = _configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")!;
-        var sqlConnection = new SqlConnection(connectionString);
+        string connectionString = _configuration.GetConnectionString("MySQLConnectionString")!;
+        var sqlConnection = new MySqlConnection(connectionString);
         sqlConnection.Open();
 
-        var sqlcommand = new SqlCommand(
+        var sqlcommand = new MySqlCommand(
         "SELECT CourseID,CourseName,Rating FROM Course;",sqlConnection);
-         using (SqlDataReader sqlDatareader = sqlcommand.ExecuteReader())
+         using (MySqlDataReader sqlDatareader = sqlcommand.ExecuteReader())
          {
              while (sqlDatareader.Read())
                 {
