@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySqlData.Data.MySqlClient;
+using MySql.Data.MySqlClient;
+
 
 namespace learningapp.Pages;
 
@@ -18,7 +19,7 @@ public class IndexModel : PageModel
     public void OnGet()
     {
        
-        string connectionString = _configuration.GetConnectionString("MySQLConnectionString")!;
+        string connectionString = _configuration.GetConnectionString("MySQLConnectionString");
         var sqlConnection = new MySqlConnection(connectionString);
         sqlConnection.Open();
 
